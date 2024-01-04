@@ -10,7 +10,7 @@ class PurgeContactFieldType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('fields', ContactFieldType::class, [
-            'label'      => 'mautic.leuchtfeuer.action.purgecontactfield.form.field',
+            'label'      => 'lf.campaign.action.purgecontactfield.type.title',
             'label_attr' => ['class' => 'control-label'],
             'attr'       => [
                 'class'        => 'form-control',
