@@ -16,21 +16,14 @@ class ContactFieldType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $fields = $this->fieldModel->getEntities(
-            [
-                'filter' => [
-                    'isPublished' => true,
-                    'object'      => 'lead',
-                ],
-            ]
-        );
+        $fields  = $this->fieldModel->getLeadFields();
         $choices = [];
         foreach ($fields as $field) {
             $key = $field->getLabel();
             if (!empty($field->isUniqueIdentifer())) {
                 $key .= '*';
             }
-            $choices[$key] = $field->getId();
+            $choices[$key] = $field->getAlias();
         }
 
         $resolver->setDefaults([
