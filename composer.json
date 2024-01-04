@@ -1,0 +1,47 @@
+{
+  "name": "leuchtfeuer/mautic-purge-contactfield-bundle",
+  "type": "mautic-plugin",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Leuchtfeuer Digital Marketing GmbH",
+      "email": "mautic@Leuchtfeuer.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": "^7.4|^8.0.2",
+    "ext-pdo": "*",
+    "mautic/core-lib": "^4.0|^5.0",
+    "php-http/message-factory": "^1.1"
+  },
+  "extra": {
+    "install-directory-name": "LeuchtfeuerPurgeContactFieldBundle"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.4",
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "MauticPlugin\\LeuchtfeuerPurgeContactFieldBundle\\": ""
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MauticPlugin\\LeuchtfeuerPurgeContactFieldBundle\\Tests\\": "Tests"
+    }
+  },
+  "repositories": [
+  ],
+  "scripts": {
+    "cs-fix": "./vendor/bin/php-cs-fixer fix --config .php-cs-fixer.php --using-cache no --show-progress dots -v"
+  },
+  "config": {
+    "allow-plugins": {
+      "php-http/discovery": true,
+      "symfony/flex": true
+    }
+  }
+}
