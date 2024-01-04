@@ -5,20 +5,12 @@ namespace MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\EventListener;
 use Mautic\CampaignBundle\CampaignEvents;
 use Mautic\CampaignBundle\Event\CampaignBuilderEvent;
 use Mautic\CampaignBundle\Event\PendingEvent;
-use Mautic\CampaignBundle\Membership\MembershipManager;
-use Mautic\CampaignBundle\Model\CampaignModel;
 use MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Form\Type\PurgeContactFieldType;
 use MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\LeuchtfeuerPurgeContactFieldEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class PurgeContactFieldsSubscriber implements EventSubscriberInterface
 {
-    public function __construct(
-        private MembershipManager $membershipManager,
-        private CampaignModel $campaignModel
-    ) {
-    }
-
     public static function getSubscribedEvents(): array
     {
         return [
