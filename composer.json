@@ -36,7 +36,8 @@
   "repositories": [
   ],
   "scripts": {
-    "cs-fix": "./vendor/bin/php-cs-fixer fix --config .php-cs-fixer.php --using-cache no --show-progress dots -v"
+    "cs-fix": "./vendor/bin/php-cs-fixer fix --config .php-cs-fixer.php --using-cache no --show-progress dots -v",
+    "test": "../../bin/phpunit -d memory_limit=1G --bootstrap ../../vendor/autoload.php --configuration ../../app/phpunit.xml.dist --filter LeuchtfeuerPurgeContactFieldBundle"
   },
   "config": {
     "allow-plugins": {
