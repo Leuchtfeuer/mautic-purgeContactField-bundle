@@ -14,6 +14,7 @@ class PurgeContactFieldType extends AbstractType
             'label_attr' => ['class' => 'control-label'],
             'attr'       => [
                 'class'        => 'form-control',
+                'tooltip'      => 'lf.campaign.action.purgecontactfield.type.desc',
             ],
             'multiple' => true,
             'expanded' => false,

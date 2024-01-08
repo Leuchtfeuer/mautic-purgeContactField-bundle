@@ -3,7 +3,7 @@
 return [
     'name'        => 'Purge Contact Fields by Leuchtfeuer',
     'description' => 'Adds Mautic campaign action to purge a contact field',
-    'version'     => '0.0.1',
+    'version'     => '1.0.0',
     'author'      => 'Leuchtfeuer Digital Marketing GmbH',
     'services'    => [
         'integrations' => [
