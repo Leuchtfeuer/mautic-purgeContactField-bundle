@@ -11,7 +11,7 @@ class ActionPurgeContactFieldIntegration extends BasicIntegration implements Bas
     use ConfigurationTrait;
 
     public const INTEGRATION_NAME = 'actionpurgecontactfield';
-    public const DISPLAY_NAME     = 'Action - Purge Contact Field';
+    public const DISPLAY_NAME     = 'Purge Contact Field';
 
     public function getIcon(): string
     {
