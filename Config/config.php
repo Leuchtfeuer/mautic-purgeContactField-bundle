@@ -20,6 +20,12 @@ return [
                     'mautic.config_integration',
                 ],
             ],
+            'actionpurgecontactfield.integration.config' => [
+                'class'     => \MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Integration\Config::class,
+                'arguments' => [
+                    'mautic.integrations.helper',
+                ],
+            ],
         ],
     ],
 ];
