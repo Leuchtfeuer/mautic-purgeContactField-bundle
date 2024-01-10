@@ -9,6 +9,7 @@ use Mautic\LeadBundle\Entity\Lead;
 use Mautic\LeadBundle\Model\LeadModel;
 use MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\EventListener\PurgeContactFieldsSubscriber;
 use MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Model\LfFieldModel;
+use MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Integration\Config;
 
 class PurgeContactFieldsSubscriberTest extends \PHPUnit\Framework\TestCase
 {
@@ -18,10 +19,12 @@ class PurgeContactFieldsSubscriberTest extends \PHPUnit\Framework\TestCase
 
         $this->leadModel          = $this->createMock(LeadModel::class);
         $this->lfFieldModel       = $this->createMock(LfFieldModel::class);
+        $this->config             = $this->createMock(Config::class);
 
         $this->subscriber = new PurgeContactFieldsSubscriber(
             $this->leadModel,
             $this->lfFieldModel,
+            $this->config
         );
     }
 
