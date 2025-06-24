@@ -7,7 +7,9 @@
   "authors": [
     {
       "name": "Leuchtfeuer Digital Marketing GmbH",
-      "email": "mautic@Leuchtfeuer.com"
+      "email": "mautic@Leuchtfeuer.com",
+      "homepage": "https://Leuchtfeuer.com/mautic/",
+      "role": "Developer"
     }
   ],
   "minimum-stability": "dev",
