@@ -2,7 +2,7 @@ name: ciUnitTests
 on:
   pull_request:
     branches:
-      - 'main'
+      - 'mautic*'
 
 jobs:
   integration:
