@@ -1,13 +1,13 @@
 # Purge Contact Field by Leuchtfeuer 
 
 ## Overview
-This plugin provides a new campaign action to purge a contact's field value.
+This plugin provides a new campaign action to purge field values of contacts.
 ![img-example.png](Assets%2Fimg%2Fimg-example.png)
 
 ## Requirements for this release
 > [!TIP]
 > Other releases of this plugin may cover different Mautic versions!
-- Mautic 7.x (min. 7.0)
+- Mautic 7.x
 - PHP 8.2+
 
 ## Installation

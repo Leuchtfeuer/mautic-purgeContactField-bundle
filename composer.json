@@ -1,6 +1,6 @@
 {
     "name": "leuchtfeuer/mautic-purge-contactfield-bundle",
-    "description": "Adds Mautic campaign action to purge a contact field",
+    "description": "Adds Mautic campaign action to purge a contact fields",
     "license": "GPL-3.0",
     "type": "mautic-plugin",
     "homepage": "https://www.Leuchtfeuer.com",
@@ -12,7 +12,7 @@
             "role": "Developer"
         }
     ],
-    "keywords": ["mautic", "plugin", "integration", "contact-field"],
+    "keywords": ["mautic", "plugin", "integration"],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {

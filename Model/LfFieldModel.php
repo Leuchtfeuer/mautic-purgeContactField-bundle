@@ -74,11 +74,9 @@ class LfFieldModel extends FieldModel
                     $value = [];
                     break;
                 case in_array($fieldType, self::EMPTY_DATE):
-                    //                    $value = new \DateTime();
                     $value = null;
                     break;
                 case in_array($fieldType, self::EMPTY_TIME):
-                    //                    $value = new \DateTime();
                     $value = null;
                     break;
                 case 'boolean':
