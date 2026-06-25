@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Model;
 
 use Mautic\LeadBundle\Helper\FormFieldHelper;
@@ -37,21 +39,24 @@ class LfFieldModel extends FieldModel
         'time',
     ];
 
-    public function getPurgeValueByAlias(string $alias)
+    public function getPurgeValueByAlias(string $alias): mixed
     {
         $field = $this->getEntityByAlias($alias);
         if (!$field instanceof \Mautic\LeadBundle\Entity\LeadField) {
-            new \Exception('Field not found');
+            throw new \Exception('Field not found');
         }
 
         return $this->getPurgeFieldValueByType($field->getType());
     }
 
-    public function getPurgeFieldValueByType($type)
+    public function getPurgeFieldValueByType(string $type): mixed
     {
         return $this->getPurgeFieldValues()[$type];
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getPurgeFieldValues(): array
     {
         $fieldHelper = new FormFieldHelper();
@@ -69,11 +74,11 @@ class LfFieldModel extends FieldModel
                     $value = [];
                     break;
                 case in_array($fieldType, self::EMPTY_DATE):
-//                    $value = new \DateTime();
+                    //                    $value = new \DateTime();
                     $value = null;
                     break;
                 case in_array($fieldType, self::EMPTY_TIME):
-//                    $value = new \DateTime();
+                    //                    $value = new \DateTime();
                     $value = null;
                     break;
                 case 'boolean':

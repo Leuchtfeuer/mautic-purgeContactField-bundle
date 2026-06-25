@@ -8,20 +8,20 @@ return [
     'services'    => [
         'integrations' => [
             'mautic.integration.actionpurgecontactfield' => [
-                'class' => \MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Integration\ActionPurgeContactFieldIntegration::class,
+                'class' => MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Integration\ActionPurgeContactFieldIntegration::class,
                 'tags'  => [
                     'mautic.integration',
                     'mautic.basic_integration',
                 ],
             ],
             'actionpurgecontactfield.integration.configuration' => [
-                'class'  => \MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Integration\Support\ConfigSupport::class,
+                'class'  => MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Integration\Support\ConfigSupport::class,
                 'tags'   => [
                     'mautic.config_integration',
                 ],
             ],
             'actionpurgecontactfield.integration.config' => [
-                'class'     => \MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Integration\Config::class,
+                'class'     => MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Integration\Config::class,
                 'arguments' => [
                     'mautic.integrations.helper',
                 ],
