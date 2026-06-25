@@ -65,6 +65,9 @@ class LfFieldModel extends FieldModel
         foreach ($fieldsType as $fieldType) {
             switch ($fieldType) {
                 case in_array($fieldType, self::EMPTY_TEXT):
+                case in_array($fieldType, self::EMPTY_DATE):
+                case in_array($fieldType, self::EMPTY_TIME):
+                default:
                     $value = null;
                     break;
                 case in_array($fieldType, self::EMPTY_NUMBER):
@@ -73,17 +76,8 @@ class LfFieldModel extends FieldModel
                 case in_array($fieldType, self::EMPTY_LIST):
                     $value = [];
                     break;
-                case in_array($fieldType, self::EMPTY_DATE):
-                    $value = null;
-                    break;
-                case in_array($fieldType, self::EMPTY_TIME):
-                    $value = null;
-                    break;
                 case 'boolean':
                     $value = false;
-                    break;
-                default:
-                    $value = null;
                     break;
             }
             $result[$fieldType] = $value;

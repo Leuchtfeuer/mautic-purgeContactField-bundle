@@ -1,4 +1,4 @@
-# Purge Contact Field by Leuchtfeuer 
+# Purge Contact Fields by Leuchtfeuer 
 
 ## Overview
 This plugin provides a new campaign action to purge field values of contacts.
