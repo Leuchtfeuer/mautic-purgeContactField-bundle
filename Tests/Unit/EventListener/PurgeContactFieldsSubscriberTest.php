@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Tests\EventListener;
+namespace MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Tests\Unit\EventListener;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Mautic\CampaignBundle\Entity\Event;

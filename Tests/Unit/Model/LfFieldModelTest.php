@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Tests\Model;
+namespace MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Tests\Unit\Model;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Mautic\CoreBundle\Doctrine\Helper\ColumnSchemaHelper;
