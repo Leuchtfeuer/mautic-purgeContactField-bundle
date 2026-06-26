@@ -57,6 +57,11 @@ class PurgeContactFieldsSubscriber implements EventSubscriberInterface
 
         $fieldsPurged = $event->getEvent()->getProperties()['fields'] ?? [];
 
+        $purgeFieldsValues = [];
+        foreach ($fieldsPurged as $fieldAlias) {
+            $purgeFieldsValues[$fieldAlias] = $this->lfFieldModel->getPurgeValueByAlias($fieldAlias);
+        }
+
         foreach ($event->getPending() as $log) {
             $lead = $log->getLead();
             if (null === $lead) {
@@ -65,10 +70,6 @@ class PurgeContactFieldsSubscriber implements EventSubscriberInterface
             }
 
             try {
-                $purgeFieldsValues = [];
-                foreach ($fieldsPurged as $fieldAlias) {
-                    $purgeFieldsValues[$fieldAlias] = $this->lfFieldModel->getPurgeValueByAlias($fieldAlias);
-                }
                 $this->leadModel->setFieldValues($lead, $purgeFieldsValues, true);
                 $this->leadModel->saveEntity($lead);
                 $event->pass($log);
