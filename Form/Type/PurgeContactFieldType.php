@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -22,7 +24,7 @@ class PurgeContactFieldType extends AbstractType
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'purgecontactfield';
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Integration;
 
 use Mautic\IntegrationsBundle\Integration\BasicIntegration;
@@ -11,6 +13,7 @@ class ActionPurgeContactFieldIntegration extends BasicIntegration implements Bas
     use ConfigurationTrait;
 
     public const INTEGRATION_NAME = 'actionpurgecontactfield';
+
     public const DISPLAY_NAME     = 'Purge Contact Field';
 
     public function getIcon(): string

@@ -1,6 +1,8 @@
 <?php
 
-namespace MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Tests\Model;
+declare(strict_types=1);
+
+namespace MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Tests\Unit\Model;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Mautic\CoreBundle\Doctrine\Helper\ColumnSchemaHelper;
@@ -12,7 +14,7 @@ use Mautic\LeadBundle\Entity\LeadFieldRepository;
 use Mautic\LeadBundle\Field\CustomFieldColumn;
 use Mautic\LeadBundle\Field\Dispatcher\FieldSaveDispatcher;
 use Mautic\LeadBundle\Field\FieldList;
-use Mautic\LeadBundle\Field\FieldsWithUniqueIdentifier;
+use Mautic\LeadBundle\Field\LeadFieldDeleter;
 use Mautic\LeadBundle\Field\LeadFieldSaver;
 use Mautic\LeadBundle\Model\ListModel;
 use MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Model\LfFieldModel;
@@ -22,17 +24,18 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class LfFieldModelTest extends \PHPUnit\Framework\TestCase
 {
+    private LfFieldModel $LfFieldModel;
+
     public function setUp(): void
     {
-        $columnSchemaHelper         = $this->createMock(ColumnSchemaHelper::class);
-        $leadListModel              = $this->createMock(ListModel::class);
-        $customFieldColumn          = $this->createMock(CustomFieldColumn::class);
-        $fieldSaveDispatcher        = $this->createMock(FieldSaveDispatcher::class);
-        $leadFieldRepository        = $this->createMock(LeadFieldRepository::class);
-
-        $fieldsWithUniqueIdentifier = $this->createMock(FieldsWithUniqueIdentifier::class);
-        $fieldList                  = $this->createMock(FieldList::class);
-        $leadFieldSaver             = $this->createMock(LeadFieldSaver::class);
+        $columnSchemaHelper  = $this->createMock(ColumnSchemaHelper::class);
+        $leadListModel       = $this->createMock(ListModel::class);
+        $customFieldColumn   = $this->createMock(CustomFieldColumn::class);
+        $fieldSaveDispatcher = $this->createMock(FieldSaveDispatcher::class);
+        $leadFieldRepository = $this->createMock(LeadFieldRepository::class);
+        $fieldList           = $this->createMock(FieldList::class);
+        $leadFieldSaver      = $this->createMock(LeadFieldSaver::class);
+        $leadFieldDeleter    = $this->createMock(LeadFieldDeleter::class);
 
         $this->LfFieldModel = new LfFieldModel(
             $columnSchemaHelper,
@@ -40,9 +43,9 @@ class LfFieldModelTest extends \PHPUnit\Framework\TestCase
             $customFieldColumn,
             $fieldSaveDispatcher,
             $leadFieldRepository,
-            $fieldsWithUniqueIdentifier,
             $fieldList,
             $leadFieldSaver,
+            $leadFieldDeleter,
             $this->createMock(EntityManagerInterface::class),
             $this->createMock(CorePermissions::class),
             $this->createMock(EventDispatcherInterface::class),
@@ -54,22 +57,22 @@ class LfFieldModelTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetPurgeFieldValues()
+    public function testGetPurgeFieldValues(): void
     {
         $result = $this->LfFieldModel->getPurgeFieldValues();
         $this->assertIsArray($result);
         $this->assertArrayHasKey('text', $result);
         $this->assertArrayHasKey('datetime', $result);
         $this->assertArrayHasKey('number', $result);
-        $this->assertSame(null, $result['text']);
+        $this->assertNull($result['text']);
         $this->assertSame(0, $result['number']);
-        $this->assertSame(null, $result['datetime']);
+        $this->assertNull($result['datetime']);
     }
 
-    public function testGetPurgeFieldValueByType()
+    public function testGetPurgeFieldValueByType(): void
     {
         $result = $this->LfFieldModel->getPurgeFieldValueByType('text');
-        $this->assertSame(null, $result);
+        $this->assertNull($result);
         $result = $this->LfFieldModel->getPurgeFieldValueByType('number');
         $this->assertSame(0, $result);
     }

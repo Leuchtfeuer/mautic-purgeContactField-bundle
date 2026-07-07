@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\EventListener;
 
 use Mautic\CampaignBundle\CampaignEvents;
 use Mautic\CampaignBundle\Event\CampaignBuilderEvent;
-use Mautic\CampaignBundle\Event\CampaignExecutionEvent;
+use Mautic\CampaignBundle\Event\PendingEvent;
 use Mautic\LeadBundle\Model\LeadModel;
 use MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Form\Type\PurgeContactFieldType;
 use MauticPlugin\LeuchtfeuerPurgeContactFieldBundle\Integration\Config;
@@ -29,7 +31,7 @@ class PurgeContactFieldsSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function addAction(CampaignBuilderEvent $event)
+    public function addAction(CampaignBuilderEvent $event): void
     {
         if (!$this->config->isPublished()) {
             return;
@@ -37,26 +39,43 @@ class PurgeContactFieldsSubscriber implements EventSubscriberInterface
         $event->addAction(
             'campaign.purgecontactfields',
             [
-                'label'           => 'lf.campaign.action.purgecontactfield.title',
-                'description'     => 'lf.campaign.action.purgecontactfield.description',
-                'formType'        => PurgeContactFieldType::class,
-                'eventName'       => LeuchtfeuerPurgeContactFieldEvents::ON_PURGE_CONTACT_FIELD,
+                'label'          => 'lf.campaign.action.purgecontactfield.title',
+                'description'    => 'lf.campaign.action.purgecontactfield.description',
+                'formType'       => PurgeContactFieldType::class,
+                'batchEventName' => LeuchtfeuerPurgeContactFieldEvents::ON_PURGE_CONTACT_FIELD,
             ]
         );
     }
 
-    public function purgeContactField(CampaignExecutionEvent $event): void
+    public function purgeContactField(PendingEvent $event): void
     {
         if (!$this->config->isPublished()) {
+            $event->failAll('Plugin not published');
+
             return;
         }
-        $fieldsPurged      = $event->getConfig()['fields'];
+
+        $fieldsPurged = $event->getEvent()->getProperties()['fields'] ?? [];
+
         $purgeFieldsValues = [];
-        foreach ($fieldsPurged as $fieldPurged) {
-            $purgeFieldsValues[$fieldPurged] = $this->lfFieldModel->getPurgeValueByAlias($fieldPurged);
+        foreach ($fieldsPurged as $fieldAlias) {
+            $purgeFieldsValues[$fieldAlias] = $this->lfFieldModel->getPurgeValueByAlias($fieldAlias);
         }
-        $lead = $event->getLead();
-        $this->leadModel->setFieldValues($lead, $purgeFieldsValues, true);
-        $this->leadModel->saveEntity($lead);
+
+        foreach ($event->getPending() as $log) {
+            $lead = $log->getLead();
+            if (null === $lead) {
+                $event->pass($log);
+                continue;
+            }
+
+            try {
+                $this->leadModel->setFieldValues($lead, $purgeFieldsValues, true);
+                $this->leadModel->saveEntity($lead);
+                $event->pass($log);
+            } catch (\Exception $e) {
+                $event->fail($log, $e->getMessage());
+            }
+        }
     }
 }

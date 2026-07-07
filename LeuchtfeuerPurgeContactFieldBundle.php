@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MauticPlugin\LeuchtfeuerPurgeContactFieldBundle;
 
-use Mautic\PluginBundle\Bundle\PluginBundleBase;
+use Mautic\IntegrationsBundle\Bundle\AbstractPluginBundle;
 
-class LeuchtfeuerPurgeContactFieldBundle extends PluginBundleBase
+class LeuchtfeuerPurgeContactFieldBundle extends AbstractPluginBundle
 {
 }
